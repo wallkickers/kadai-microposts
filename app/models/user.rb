@@ -20,13 +20,18 @@ class User < ApplicationRecord
     end
   end
   
- def unfollow(other_user)
+  def unfollow(other_user)
     relationship = self.relationships.find_by(follow_id: other_user.id)
     relationship.destroy if relationship
   end
   
+  
   def following?(other_user)
     self.followings.include?(other_user)
+  end
+  
+  def feed_microposts
+    Micropost.where(user_id: self.following_ids + [self.id])
   end
 
 end
