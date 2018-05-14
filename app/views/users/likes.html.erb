@@ -1,7 +1,7 @@
 <% if logged_in? %>
  <div class="row">
    <aside class="col-md-4">
-     <%= form_for(@micropost) do |f| %>
+      <%= form_for(@micropost) do |f| %>
        <div class="form_group">
          <%= f.text_area :content, class: "form-control",rows: 5 %>
        </div>
@@ -9,11 +9,11 @@
       <% end %>
    </aside>
    <div class="col-xs-8">
-     <ul class="nav nav-tabs nav-justified">
+    <ul class="nav nav-tabs nav-justified">
       <li class="<%= "active" if current_page?(root_path) %>"><%= link_to "Time_line",root_path %></li>
       <li class="<%= "active" if current_page?(likes_user_path(@current_user)) %>"><%= link_to likes_user_path(@current_user) do %>Like_posts<span class="badge"><%= @count_like_posts %></span><% end %></li>
     </ul>
-     <%= render "microposts/microposts", microposts: @microposts %>
+    <%= render "microposts/microposts_for_like", microposts: @like_posts %>
    </div>
  </div>
 <% else %>
